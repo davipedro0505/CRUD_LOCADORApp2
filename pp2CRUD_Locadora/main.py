@@ -7,14 +7,25 @@ alugueis = []
 #cliente
 def cadastrar_cliente():
     print("\n - Cadastro de cliente - ")
-    nome = input("Digite seu nome: ")
-    cpf = input("Digite seu CPF: ")
-    telefone = input("Digite seu número de telefone: ")
+
+    nome = input("Digite seu nome: ").upper()
+
+    cpf = input("Digite seu CPF (somente números): ")
+    cpf_formatado = cpf[:3] + "." + cpf[3:6] + "." + cpf[6:9] + "-" + cpf[9:]
+
+    telefone = input("Digite seu número de telefone (somente números): ")
+
+    if len(telefone) == 11:
+        telefone_formatado = f"({telefone[:2]}) {telefone[2:7]}-{telefone[7:]}"
+    else:
+        telefone_formatado = telefone 
+
     endereco = input("Digite seu endereço: ")
+
     novo_cliente = {
         "nome": nome,
-        "cpf": cpf,
-        "telefone": telefone,
+        "cpf": cpf_formatado,
+        "telefone": telefone_formatado,
         "endereco": endereco
     }
 
@@ -25,7 +36,7 @@ def listar_clientes():
     print("\n - Lista de Clientes Cadastrados - ")
     encontrados = False
     for cliente in clientes:
-        print(f'Nome: {cliente["nome"]} | CPF: {cliente["cpf"]} | Telefone: {cliente["telefone"]} | Endereço: {cliente["endereco"]}')
+        print(f'Nome: {cliente["nome"].upper()} | CPF: {cliente["cpf"]} | Telefone: {cliente["telefone"]} | Endereço: {cliente["endereco"].upper()}')
         encontrados = True
     if not encontrados:
         print("Nenhum cliente cadastrado no momento.\n")
@@ -75,8 +86,8 @@ def excluir_clientes():
 def cadastrar_filme():
     print("\n=== Cadastro de Filme ===")
     codigo = input("Código do Filme: ")
-    titulo = input("Título do Filme: ")
-    genero = input("Gênero: ")
+    titulo = input("Título do Filme: ").upper()
+    genero = input("Gênero: ").upper()
     ano = input("Ano de Lançamento: ")
 
     novo_filme = {
@@ -107,8 +118,8 @@ def alterar_filme():
     for filme in filmes:
         if filme["codigo"] == codigo:
             print(f"Filme encontrado: {filme['titulo']}")
-            novo_titulo = input("Novo título (deixe vazio para manter o atual): ")
-            novo_genero = input("Novo gênero (deixe vazio para manter o atual): ")
+            novo_titulo = input("Novo título (deixe vazio para manter o atual): ").upper()
+            novo_genero = input("Novo gênero (deixe vazio para manter o atual): ").upper()
             novo_ano = input("Novo ano (deixe vazio para manter o atual): ")
 
             if novo_titulo:
