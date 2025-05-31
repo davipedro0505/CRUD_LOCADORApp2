@@ -1,31 +1,6 @@
-import json
-import os
-
 filmes = []
 clientes = []
 alugueis = []
-
-#****************************************************************************************************************
-#JSON
-def salvar_dados():
-    with open("filmes.json", "w") as f:
-        json.dump(filmes, f, indent=4)
-    with open("clientes.json", "w") as f:
-        json.dump(clientes, f, indent=4)
-    with open("alugueis.json", "w") as f:
-        json.dump(alugueis, f, indent=4)
-
-def carregar_dados():
-    global filmes, clientes, alugueis
-    if os.path.exists("filmes.json"):
-        with open("filmes.json", "r") as f:
-            filmes = json.load(f)
-    if os.path.exists("clientes.json"):
-        with open("clientes.json", "r") as f:
-            clientes = json.load(f)
-    if os.path.exists("alugueis.json"):
-        with open("alugueis.json", "r") as f:
-            alugueis = json.load(f)
 
 #****************************************************************************************************************
 
@@ -240,7 +215,6 @@ def devolver_filme():
 
 def menu():
 
-    carregar_dados()
     while True:
         print("*" * 60)
         print(" MENU - Locadora CineFácil".center(60))
@@ -265,7 +239,6 @@ def menu():
         nmr_menu = input("Digite o número da função desejada: ").strip()
 
         if nmr_menu== "0":
-            salvar_dados()
             print("Encerrando... Obrigado por usar a Locadora CineFácil!")
             break
 
@@ -302,4 +275,3 @@ def menu():
             print("Opção inválida.\n")
 
 menu()
-
